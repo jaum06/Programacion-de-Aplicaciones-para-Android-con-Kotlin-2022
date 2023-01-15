@@ -21,7 +21,10 @@ class MainActivity : AppCompatActivity() {
         val fecha = "14/01/2023"
         var nombre = "Juan"
         var vip = false
-        var saludo = "Hola " + saldo
+        var saludo = "Hola " + nombre
+
+        if (vip) saludo += " te queremos mucho"
+        else saludo += " quieres ser vip? paga la cuota"
 
         nombre = "Andres"
         println(saludo)
