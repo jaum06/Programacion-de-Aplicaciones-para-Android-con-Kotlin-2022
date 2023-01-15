@@ -23,6 +23,17 @@ class MainActivity : AppCompatActivity() {
         var vip = false
         var saludo = "Hola " + nombre
 
+        var mes = fecha.subSequence(3, 5).toString().toInt()
+
+        when (mes) {
+            1 -> println("En enero hay la super oferta del 7% de interés")
+            2, 3 -> println("En invierno no hay ofertas de inversiones")
+            4, 5, 6 -> println("En primavera hay ofertas de inversiones con el 1.5% de interés")
+            7, 8, 9 -> println("En verano hay ofertas de inversiones con el 2.5% de interés")
+            10, 11, 12 -> println("En otoño hay ofertas de inversiones con el 3.5% de interés")
+            else -> println("El mes es incorrecto")
+        }
+
         if (vip) saludo += " te queremos mucho"
         else saludo += " quieres ser vip? paga la cuota"
 
