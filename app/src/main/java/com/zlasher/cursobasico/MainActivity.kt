@@ -78,6 +78,9 @@ class MainActivity : AppCompatActivity() {
         retirar_dinero(2000f)
 
         var recibos: Array<String> = arrayOf("luz", "agua", "gas")
+        recibos.set(2, "internet")
+
+        recorrerArray(recibos)
 
         var matriz = arrayOf(
             intArrayOf(1, 2, 3),
@@ -124,6 +127,7 @@ class MainActivity : AppCompatActivity() {
         a <= b
     }
 
+
     fun mostrar_saldo() {
         println("Tienes $saldo $moneda")
     }
@@ -150,5 +154,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun verificarCantidad(cantidad: Float): Boolean {
         return cantidad > saldo
+    }
+
+    private fun recorrerArray(array: Array<String>) {
+
+        for (i in array) println(i)
+
+        for (i in array.indices) println(array.get(i))
+
+        for (i in 0..array.size - 1) println("${i + 1}: ${array.get(i)}")
     }
 }
