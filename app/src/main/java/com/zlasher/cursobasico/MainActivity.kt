@@ -53,6 +53,18 @@ class MainActivity : AppCompatActivity() {
         nombre = "Andres"
         println(saludo)
 
+        var pin = 1234
+        var intentos = 0
+        var clave_ingresada = 1230
+
+        do {
+            println("Ingrese el PIN")
+            println("Clave ingresada: ${clave_ingresada++}")
+            intentos++
+        } while (intentos < 3 && clave_ingresada != pin)
+
+        if (intentos == 3) println("Tarjeta bloqueda")
+
         var a = 5 + 5
         var b = 10 - 2
         var c = 3 * 4
