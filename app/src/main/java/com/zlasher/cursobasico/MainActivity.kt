@@ -79,6 +79,12 @@ class MainActivity : AppCompatActivity() {
 
         var recibos: Array<String> = arrayOf("luz", "agua", "gas")
 
+        var matriz = arrayOf(
+            intArrayOf(1, 2, 3),
+            intArrayOf(4, 5, 6),
+            intArrayOf(7, 8, 9, 10, 11, 12, 13)
+        )
+
         var a = 5 + 5
         var b = 10 - 2
         var c = 3 * 4
