@@ -74,6 +74,10 @@ class MainActivity : AppCompatActivity() {
         mostrar_saldo()
         ingresar_dinero(50.5f)
         retirar_dinero(40f)
+        retirar_dinero(40f)
+        retirar_dinero(2000f)
+
+        var recibos: Array<String> = arrayOf("luz", "agua", "gas")
 
         var a = 5 + 5
         var b = 10 - 2
@@ -131,8 +135,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun retirar_dinero(cantidad: Float) {
-        saldo -= cantidad
-        println("Se ha retirado $cantidad $moneda")
-        mostrar_saldo()
+        if (verificarCantidad(cantidad)) {
+            saldo -= cantidad
+            println("Se ha retirado $cantidad $moneda")
+            mostrar_saldo()
+        } else println("Cantidad superior al saldo. Imposible realizar la operación.")
+    }
+
+    private fun verificarCantidad(cantidad: Float): Boolean {
+        return cantidad > saldo
     }
 }
