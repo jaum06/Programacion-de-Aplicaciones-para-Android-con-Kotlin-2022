@@ -18,10 +18,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fecha = "14/01/2023"
+        val fecha = "01/01/2023"
         var nombre = "Juan"
         var vip = false
         var saludo = "Hola " + nombre
+
+        var dia = fecha.subSequence(0, 2).toString().toInt()
+        if (dia == 1) ingresar_sueldo()
 
         var mes = fecha.subSequence(3, 5).toString().toInt()
 
@@ -55,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
         var pin = 1234
         var intentos = 0
-        var clave_ingresada = 1233
+        var clave_ingresada = 1234
 
         do {
             println("Ingrese el PIN")
@@ -65,6 +68,8 @@ class MainActivity : AppCompatActivity() {
         } while (intentos < 3 && clave_ingresada != pin)
 
         if (intentos == 3) println("Tarjeta bloqueda")
+
+        mostrar_saldo()
 
         var a = 5 + 5
         var b = 10 - 2
@@ -103,5 +108,15 @@ class MainActivity : AppCompatActivity() {
         a < b
         a >= b
         a <= b
+    }
+
+    fun mostrar_saldo() {
+        println("Tienes $saldo $moneda")
+    }
+
+    fun ingresar_sueldo() {
+        saldo += sueldo
+        println("Se ha ingresado tu sueldo de $sueldo $moneda")
+        mostrar_saldo()
     }
 }
