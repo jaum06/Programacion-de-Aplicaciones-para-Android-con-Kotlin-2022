@@ -55,5 +55,13 @@ class MainActivity : AppCompatActivity() {
         println(dPostDecremento)
 
         saldo += sueldo
+        saldo++
+
+        a == b
+        a != b
+        a > b
+        a < b
+        a >= b
+        a <= b
     }
 }
