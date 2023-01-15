@@ -34,6 +34,19 @@ class MainActivity : AppCompatActivity() {
             else -> println("El mes es incorrecto")
         }
 
+        var a1 = true
+        var b1 = true
+        var c1 = false
+        var d1 = false
+
+        a1 && b1
+        a1 || b1
+
+        a1 && c1
+        a1 && c1
+
+        !d1
+
         if (vip) saludo += " te queremos mucho"
         else saludo += " quieres ser vip? paga la cuota"
 
