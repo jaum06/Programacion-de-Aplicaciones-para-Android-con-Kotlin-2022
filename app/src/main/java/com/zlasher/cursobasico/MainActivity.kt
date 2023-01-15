@@ -53,6 +53,8 @@ class MainActivity : AppCompatActivity() {
         if (vip) saludo += " te queremos mucho"
         else saludo += " quieres ser vip? paga la cuota"
 
+        mostrar_saldo()
+
         nombre = "Andres"
         println(saludo)
 
@@ -70,6 +72,8 @@ class MainActivity : AppCompatActivity() {
         if (intentos == 3) println("Tarjeta bloqueda")
 
         mostrar_saldo()
+        ingresar_dinero(50.5f)
+        retirar_dinero(40f)
 
         var a = 5 + 5
         var b = 10 - 2
@@ -117,6 +121,18 @@ class MainActivity : AppCompatActivity() {
     fun ingresar_sueldo() {
         saldo += sueldo
         println("Se ha ingresado tu sueldo de $sueldo $moneda")
+        mostrar_saldo()
+    }
+
+    fun ingresar_dinero(cantidad: Float) {
+        saldo += cantidad
+        println("Se ha ingresado $cantidad $moneda")
+        mostrar_saldo()
+    }
+
+    fun retirar_dinero(cantidad: Float) {
+        saldo -= cantidad
+        println("Se ha retirado $cantidad $moneda")
         mostrar_saldo()
     }
 }
