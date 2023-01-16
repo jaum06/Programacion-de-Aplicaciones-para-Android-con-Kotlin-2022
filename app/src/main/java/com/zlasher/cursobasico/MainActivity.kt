@@ -151,6 +151,10 @@ class MainActivity : AppCompatActivity() {
 
         println(mapa)
 
+        var inversiones = mutableMapOf<String, Float>()
+        inversiones.put("Coca-Cola", 50f)
+        println(inversiones)
+
         var a = 5 + 5
         var b = 10 - 2
         var c = 3 * 4
