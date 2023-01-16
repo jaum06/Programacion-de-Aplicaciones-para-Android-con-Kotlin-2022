@@ -143,6 +143,14 @@ class MainActivity : AppCompatActivity() {
         println(bolsa)
         println(bolsa.none())
 
+        var mapa: Map<Int, String> = mapOf(
+            1 to "España",
+            2 to "Mexico",
+            3 to "Colombia"
+        )
+
+        println(mapa)
+
         var a = 5 + 5
         var b = 10 - 2
         var c = 3 * 4
