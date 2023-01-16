@@ -84,9 +84,16 @@ class MainActivity : AppCompatActivity() {
 
         var matriz = arrayOf(
             intArrayOf(1, 2, 3),
-            intArrayOf(4, 5, 6),
-            intArrayOf(7, 8, 9, 10, 11, 12, 13)
+            intArrayOf(4, 5, 6, 7, 8, 9, 10),
+            intArrayOf(11, 12, 13, 14)
         )
+
+        for (i in (0 until matriz.size)) {
+            println()
+            for (j in (0 until matriz[i].size)) {
+                println("Posición[$i][$j]: ${matriz[i][j]}")
+            }
+        }
 
         var a = 5 + 5
         var b = 10 - 2
