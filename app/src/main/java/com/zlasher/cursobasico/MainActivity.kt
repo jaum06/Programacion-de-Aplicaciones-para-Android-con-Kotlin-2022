@@ -152,8 +152,22 @@ class MainActivity : AppCompatActivity() {
         println(mapa)
 
         var inversiones = mutableMapOf<String, Float>()
-        inversiones.put("Coca-Cola", 50f)
         println(inversiones)
+
+        var empresa = "Zlasher"
+        mostrar_saldo()
+        val cantidadInvertir = 90f
+        var index = 0
+
+        while (saldo >= cantidadInvertir) {
+            empresa = bolsa.elementAtOrNull(index)
+            if (empresa != null) {
+                saldo -= cantidadInvertir
+                println("Se ha invertido $cantidadInvertir $moneda en $empresa")
+                inversiones.put(empresa, cantidadInvertir)
+            } else break
+            index++
+        }
 
         var a = 5 + 5
         var b = 10 - 2
