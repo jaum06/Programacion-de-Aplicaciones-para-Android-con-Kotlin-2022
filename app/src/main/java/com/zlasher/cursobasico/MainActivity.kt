@@ -120,6 +120,29 @@ class MainActivity : AppCompatActivity() {
 
         println("Número de clientes: ${clientes.size}")
 
+        var divisas: List<String> = listOf("USD", "EUR", "YEN")
+        println(divisas)
+
+        var bolsa: MutableList<String> = mutableListOf("Coca-Cola", "Adidas", "Amazon", "Pfizer")
+        println(bolsa)
+
+        bolsa.add("Adobe")
+        println(bolsa)
+
+        bolsa.add("Nvidia")
+        println(bolsa)
+
+        bolsa.removeAt(2)
+        println(bolsa)
+
+        println(bolsa.first())
+        println(bolsa.last())
+        println(bolsa.elementAt(2))
+        println(bolsa.none())
+        bolsa.clear()
+        println(bolsa)
+        println(bolsa.none())
+
         var a = 5 + 5
         var b = 10 - 2
         var c = 3 * 4
