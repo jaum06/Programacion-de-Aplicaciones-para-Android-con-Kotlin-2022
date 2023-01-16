@@ -95,6 +95,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        val clientesVIP: Set<Int> = setOf(1234, 5678, 4040)
+        val setMezclado = setOf(2, 4.454, "casa", 'c')
+
+        println("Clientes VIP:")
+        println(clientesVIP)
+        println("Número de clientes VIP: ${clientesVIP.size}")
+
+        if (clientesVIP.contains(1234)) println("1234 es VIP")
+        if (clientesVIP.contains(1235)) println("1235 es VIP")
+
         var a = 5 + 5
         var b = 10 - 2
         var c = 3 * 4
