@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         ingresar_dinero(50.5f)
         retirar_dinero(40f)
         retirar_dinero(40f)
-        retirar_dinero(2000f)
+        //retirar_dinero(2000f)
 
         var recibos: Array<String> = arrayOf("luz", "agua", "gas")
         recibos.set(2, "internet")
@@ -139,9 +139,9 @@ class MainActivity : AppCompatActivity() {
         println(bolsa.last())
         println(bolsa.elementAt(2))
         println(bolsa.none())
-        bolsa.clear()
+        /*bolsa.clear()
         println(bolsa)
-        println(bolsa.none())
+        println(bolsa.none())*/
 
         var mapa: Map<Int, String> = mapOf(
             1 to "España",
@@ -151,10 +151,11 @@ class MainActivity : AppCompatActivity() {
 
         println(mapa)
 
+        mostrar_saldo()
         var inversiones = mutableMapOf<String, Float>()
         println(inversiones)
 
-        var empresa = "Zlasher"
+        var empresa: String? = null
         mostrar_saldo()
         val cantidadInvertir = 90f
         var index = 0
