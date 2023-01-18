@@ -11,7 +11,7 @@
         tools:context=".MainActivity">
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/lyPokemonPrincipal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -22,8 +22,8 @@
 
             <ImageView
                 android:id="@+id/ivPokemon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
                 tools:srcCompat="@mipmap/pokemon" />
 
             <TextView
@@ -35,6 +35,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/lyCrearPokemonPrincipal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -42,7 +43,7 @@
             android:layout_marginEnd="20dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/linearLayout"
+            app:layout_constraintStart_toEndOf="@+id/lyPokemonPrincipal"
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
@@ -69,7 +70,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
+            android:id="@+id/lyPokemonSecundario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="1dp"
@@ -78,7 +79,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+            app:layout_constraintTop_toBottomOf="@+id/lyPokemonPrincipal">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -151,24 +152,24 @@
                     android:textSize="11sp" />
 
                 <EditText
-                    android:id="@+id/etNameFirePokermon"
+                    android:id="@+id/etFireName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Nombre"
                     android:textSize="12sp" />
 
                 <EditText
-                    android:id="@+id/etAttackPowerFirePokermon"
+                    android:id="@+id/etFireAttackPower"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Poder de ataque"
                     android:textSize="12sp" />
 
                 <EditText
-                    android:id="@+id/etMaxResistenceFirePokermon"
+                    android:id="@+id/etFireBallTemperature"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="Máx resistencia"
+                    android:hint="Temperatura bola"
                     android:textSize="12sp" />
 
                 <Button
@@ -240,6 +241,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/lyAcciones"
             android:layout_width="409dp"
             android:layout_height="230dp"
             android:layout_marginStart="1dp"
@@ -247,7 +249,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+            app:layout_constraintTop_toBottomOf="@+id/lyPokemonSecundario">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -322,7 +324,7 @@
                     android:textSize="12sp" />
 
                 <EditText
-                    android:id="@+id/etNewNameFirePokemon"
+                    android:id="@+id/etNewNameFire"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nuevo nombre"
@@ -366,7 +368,7 @@
                     android:textSize="12sp" />
 
                 <EditText
-                    android:id="@+id/etNewNamePlantPokemon"
+                    android:id="@+id/etNewNamePlant"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -383,8 +385,46 @@
                     android:onClick="evolvePlantPokemon"
                     android:text="Evolucionar"
                     android:textSize="10sp" />
+
+                <Button
+                    android:id="@+id/btnDespedir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Despedir"
+                    android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/lyBatalla"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lyAcciones">
+
+            <Button
+                android:id="@+id/btnBatalla"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:onClick="fight"
+                android:text="Batalla" />
+
+            <EditText
+                android:id="@+id/mltBatalla"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -1,8 +1,5 @@
 package com.zlasher.cursobasico
 
-import android.widget.Toast
-import com.zlasher.cursobasico.MainActivity.Companion.mainContext
-
 class WaterPokemon(name: String = "Pok", attackPower: Float = 30f, life: Float = 100f) :
     Pokemon(name, attackPower, life) {
 
@@ -27,6 +24,7 @@ class WaterPokemon(name: String = "Pok", attackPower: Float = 30f, life: Float =
     }
 
     override fun attack() {
-        Toast.makeText(mainContext, "Ataque con chorro de agua!!!", Toast.LENGTH_LONG).show()
+        //Toast.makeText(mainContext, "Ataque con chorro de agua!!!", Toast.LENGTH_LONG).show()
+        println("Ataque con chorro de agua!!!")
     }
 }

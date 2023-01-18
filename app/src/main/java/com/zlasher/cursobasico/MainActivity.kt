@@ -4,24 +4,31 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
-    companion object {
+    /*companion object {
         lateinit var mainContext: Context
-    }
+    }*/
 
     private lateinit var pokemon: Pokemon
     private lateinit var waterPokemon: WaterPokemon
+    private lateinit var firePokemon: FirePokemon
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        var btnBatalla = findViewById<Button>(R.id.btnBatalla)
+        btnBatalla.setOnClickListener {
+            fight(waterPokemon, firePokemon)
+        }
     }
+
 
     fun createNewPokemon(v: View) {
 
@@ -92,5 +99,83 @@ class MainActivity : AppCompatActivity() {
 
         val tvWaterPokemon = findViewById<TextView>(R.id.tvWaterPokemon)
         loadDataPokemon(tvWaterPokemon, waterPokemon)
+    }
+
+    //sajkdljsadjsQALKDJSALkdjsaJDLKSAjdklsaJDKJSajdskjdslkaJDLKSAj
+
+    fun createNewFirePokemon(v: View) {
+
+        val etFireName = findViewById<EditText>(R.id.etFireName)
+        val etFireAttackPower = findViewById<EditText>(R.id.etFireAttackPower)
+        val etFireBallTemperature = findViewById<EditText>(R.id.etFireBallTemperature)
+
+        firePokemon = FirePokemon()
+
+        if (!etFireName.text.isNullOrEmpty() && !etFireAttackPower.text.isNullOrEmpty()) {
+            firePokemon.FirePokemon(
+                etFireName.text.toString(),
+                etFireAttackPower.text.toString().toFloat(),
+                etFireBallTemperature.text.toString().toInt()
+            )
+        }
+        val ivFirePokemon = findViewById<ImageView>(R.id.ivFirePokemon)
+        ivFirePokemon.setImageResource(R.mipmap.charmander)
+
+        val tvFirePokemon = findViewById<TextView>(R.id.tvFirePokemon)
+        loadDataPokemon(tvFirePokemon, firePokemon)
+    }
+
+    fun cureFirePokemon(v: View) {
+        firePokemon.cure()
+        val tvFirePokemon = findViewById<TextView>(R.id.tvFirePokemon)
+        loadDataPokemon(tvFirePokemon, firePokemon)
+    }
+
+    fun sayHiFirePokemon(v: View) {
+        firePokemon.sayHi()
+    }
+
+    fun evolveFirePokemon(v: View) {
+
+        val etEvolveFirePokemon = findViewById<EditText>(R.id.etNewNameFire)
+        firePokemon.evolve(etEvolveFirePokemon.text.toString())
+
+        val ivFirePokemon = findViewById<ImageView>(R.id.ivFirePokemon)
+        ivFirePokemon.setImageResource(R.mipmap.charmeleon)
+
+        val tvFirePokemon = findViewById<TextView>(R.id.tvFirePokemon)
+        loadDataPokemon(tvFirePokemon, firePokemon)
+    }
+
+    private fun fight(p1: Pokemon, p2: Pokemon) {
+
+        val mltBatalla = findViewById<EditText>(R.id.mltBatalla)
+        mltBatalla.setText("")
+        var text = "${p1.getName()} (${p1.getLife().toInt()}) Vs. ${p2.getName()} (${
+            p2.getLife().toInt()
+        })"
+
+        while (p1.getLife() > 0 && p2.getLife() > 0) {
+            text += "\n${p1.getName()} ataca!"
+            p1.attack()
+            p2.setLife(p2.getLife() - p1.getAttackPower())
+            text += "\n${p1.getName()} (${p1.getLife().toInt()}) Vs. ${p2.getName()} (${
+                p2.getLife().toInt()
+            })"
+            if (p2.getLife() > 0) {
+                text += "\n${p2.getName()} ataca!"
+                p2.attack()
+                p1.setLife(p1.getLife() - p2.getAttackPower())
+                text += "\n${p1.getName()} (${p1.getLife().toInt()}) Vs. ${p2.getName()} (${
+                    p2.getLife().toInt()
+                })"
+            }
+        }
+
+        text += "\n\nEL CAMPEÓN ES: "
+        if (p1.getLife() > 0) text += p1.getName()
+        else text += p2.getName()
+
+        mltBatalla.setText(text)
     }
 }

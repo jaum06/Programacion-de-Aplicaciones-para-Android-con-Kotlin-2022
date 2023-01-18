@@ -1,9 +1,5 @@
 package com.zlasher.cursobasico
 
-import android.widget.Toast
-import com.zlasher.cursobasico.MainActivity.Companion.mainContext
-
-
 open class Pokemon(
     protected var name: String = "Pok",
     protected var attackPower: Float = 30f,
@@ -35,7 +31,8 @@ open class Pokemon(
     }
 
     fun sayHi() {
-        Toast.makeText(mainContext, "Hola!!! soy $name", Toast.LENGTH_LONG).show()
+        //Toast.makeText(mainContext, "Hola!!! soy $name", Toast.LENGTH_LONG).show()
+        println("Hola!!! soy $name")
     }
 
     fun cure() {
@@ -49,7 +46,8 @@ open class Pokemon(
     }
 
     open fun attack() {
-        Toast.makeText(mainContext, "Al ataquee", Toast.LENGTH_LONG).show()
+        //Toast.makeText(mainContext, "Al ataquee", Toast.LENGTH_LONG).show()
+        println("Al ataquee")
     }
 
 }
