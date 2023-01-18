@@ -4,7 +4,7 @@ open class Pokemon(
     protected var name: String = "Pok",
     protected var attackPower: Float = 30f,
     protected var life: Float = 100f
-) {
+) : Thanks() {
 
     fun Pokemon(name: String, attackPower: Float) {
 
@@ -37,6 +37,7 @@ open class Pokemon(
 
     fun cure() {
         this.life = 100f
+        this.thanksCure()
     }
 
     fun evolve(name: String) {

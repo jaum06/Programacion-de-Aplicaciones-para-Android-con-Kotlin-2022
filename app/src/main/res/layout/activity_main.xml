@@ -203,24 +203,24 @@
                     android:textSize="11sp" />
 
                 <EditText
-                    android:id="@+id/etNamePlantPokermon"
+                    android:id="@+id/etPlantName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Nombre"
                     android:textSize="12sp" />
 
                 <EditText
-                    android:id="@+id/etAttackPowerPlantPokermon"
+                    android:id="@+id/etPlantAttackPower"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Poder de ataque"
                     android:textSize="12sp" />
 
                 <EditText
-                    android:id="@+id/etMaxResistencePlantPokermon"
+                    android:id="@+id/etRegenerationLife"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="Máx resistencia"
+                    android:hint="Regeneración vida"
                     android:textSize="12sp" />
 
                 <Button

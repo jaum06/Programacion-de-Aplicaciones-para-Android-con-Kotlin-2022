@@ -1,6 +1,5 @@
 package com.zlasher.cursobasico
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -11,13 +10,10 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
-    /*companion object {
-        lateinit var mainContext: Context
-    }*/
-
     private lateinit var pokemon: Pokemon
     private lateinit var waterPokemon: WaterPokemon
     private lateinit var firePokemon: FirePokemon
+    private lateinit var plantPokemon: PlantPokemon
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,8 +97,6 @@ class MainActivity : AppCompatActivity() {
         loadDataPokemon(tvWaterPokemon, waterPokemon)
     }
 
-    //sajkdljsadjsQALKDJSALkdjsaJDLKSAjdklsaJDKJSajdskjdslkaJDLKSAj
-
     fun createNewFirePokemon(v: View) {
 
         val etFireName = findViewById<EditText>(R.id.etFireName)
@@ -145,6 +139,50 @@ class MainActivity : AppCompatActivity() {
 
         val tvFirePokemon = findViewById<TextView>(R.id.tvFirePokemon)
         loadDataPokemon(tvFirePokemon, firePokemon)
+    }
+
+    fun createNewPlantPokemon(v: View) {
+
+        val etPlantName = findViewById<EditText>(R.id.etPlantName)
+        val etPlantAttackPower = findViewById<EditText>(R.id.etPlantAttackPower)
+        val etRegenerationLife = findViewById<EditText>(R.id.etRegenerationLife)
+
+        plantPokemon = PlantPokemon()
+
+        if (!etPlantName.text.isNullOrEmpty() && !etPlantAttackPower.text.isNullOrEmpty()) {
+            plantPokemon.PlantPokemon(
+                etPlantName.text.toString(),
+                etPlantAttackPower.text.toString().toFloat(),
+                etRegenerationLife.text.toString().toInt()
+            )
+        }
+        val ivPlantPokemon = findViewById<ImageView>(R.id.ivPlantPokemon)
+        ivPlantPokemon.setImageResource(R.mipmap.vulbasaur)
+
+        val tvPlantPokemon = findViewById<TextView>(R.id.tvPlantPokemon)
+        loadDataPokemon(tvPlantPokemon, plantPokemon)
+    }
+
+    fun curePlantPokemon(v: View) {
+        plantPokemon.cure()
+        val tvPlantPokemon = findViewById<TextView>(R.id.tvPlantPokemon)
+        loadDataPokemon(tvPlantPokemon, plantPokemon)
+    }
+
+    fun sayHiPlantPokemon(v: View) {
+        plantPokemon.sayHi()
+    }
+
+    fun evolvePlantPokemon(v: View) {
+
+        val etNewNamePlant = findViewById<EditText>(R.id.etNewNamePlant)
+        plantPokemon.evolve(etNewNamePlant.text.toString())
+
+        val ivPlantPokemon = findViewById<ImageView>(R.id.ivPlantPokemon)
+        ivPlantPokemon.setImageResource(R.mipmap.ivysaur)
+
+        val tvPlantPokemon = findViewById<TextView>(R.id.tvPlantPokemon)
+        loadDataPokemon(tvPlantPokemon, plantPokemon)
     }
 
     private fun fight(p1: Pokemon, p2: Pokemon) {
