@@ -10,8 +10,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         var num: Int
-        var jota = Person()
+        val jota: Person = Person("Andres", "sad13r")
+        var anonimo: Person = Person()
         println(jota.alive)
+        println(jota.name)
+        println(jota.passport)
+
+        anonimo.Person()
+        println(anonimo.alive)
+        println(anonimo.name)
+        println(anonimo.passport)
 
         jota.die()
         println(jota.alive)
