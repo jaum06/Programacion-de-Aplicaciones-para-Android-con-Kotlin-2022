@@ -24,7 +24,10 @@ class MainActivity : AppCompatActivity() {
         jota.die()
         println(jota.alive)
 
-        val bicho: Pokemon=Pokemon()
-
+        val bicho: Pokemon = Pokemon()
+        println(bicho.getName())
+        println(bicho.getAttackPower())
+        println(bicho.setLife(30f))
+        println(bicho.getLife())
     }
 }
