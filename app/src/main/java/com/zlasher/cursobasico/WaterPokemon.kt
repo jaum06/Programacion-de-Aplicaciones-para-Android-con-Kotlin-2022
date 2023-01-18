@@ -1,6 +1,7 @@
 package com.zlasher.cursobasico
 
-import android.widget.Toast
+import android.view.View
+import android.widget.EditText
 
 class WaterPokemon(name: String = "Pok", attackPower: Float = 30f, life: Float = 100f) :
     Pokemon(name, attackPower, life) {
@@ -14,7 +15,7 @@ class WaterPokemon(name: String = "Pok", attackPower: Float = 30f, life: Float =
         this.attackPower = attackPower
         this.life = 100f
         this.maxResistance = maxResistance
-        this.sayHi()
+        //this.sayHi()
     }
 
     fun breathe() {
@@ -24,5 +25,4 @@ class WaterPokemon(name: String = "Pok", attackPower: Float = 30f, life: Float =
     fun immerse() {
         this.submergedTime++
     }
-
 }

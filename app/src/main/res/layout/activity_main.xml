@@ -1,65 +1,390 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
-        <ImageView
-            android:id="@+id/ivPokemon"
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:srcCompat="@mipmap/pokemon" />
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvPokemon"
-            android:layout_width="151dp"
+            <ImageView
+                android:id="@+id/ivPokemon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:srcCompat="@mipmap/pokemon" />
+
+            <TextView
+                android:id="@+id/tvPokemon"
+                android:layout_width="151dp"
+                android:layout_height="wrap_content"
+                android:text="Pokemon"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pokemon"
-            android:textSize="12sp" />
-    </LinearLayout>
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout"
-        app:layout_constraintTop_toTopOf="parent">
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre"
+                android:textAllCaps="false" />
 
-        <EditText
-            android:id="@+id/etName"
+            <EditText
+                android:id="@+id/etAttackPower"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Poder de ataque" />
+
+            <Button
+                android:id="@+id/btnNewPokemon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:onClick="createNewPokemon"
+                android:text="Crear Pokemon" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre"
-            android:textAllCaps="false" />
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-        <EditText
-            android:id="@+id/etAttackPower"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Poder de ataque" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="32"
+                android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnNewPokemon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="createNewPokemon"
-            android:text="Crear Pokemon" />
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/ivWaterPokemon"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    tools:srcCompat="@mipmap/squirtle" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tvWaterPokemon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textSize="11sp" />
+
+                <EditText
+                    android:id="@+id/etWaterName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Nombre"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/etWaterAttackPower"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Poder de ataque"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/etWaterMaxResistence"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Máx resistencia"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnNewWaterPokemon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="createNewWaterPokemon"
+                    android:text="Crear"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="32"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivFirePokemon"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    tools:srcCompat="@mipmap/charmander" />
+
+                <TextView
+                    android:id="@+id/tvFirePokemon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textSize="11sp" />
+
+                <EditText
+                    android:id="@+id/etNameFirePokermon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Nombre"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/etAttackPowerFirePokermon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Poder de ataque"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/etMaxResistenceFirePokermon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Máx resistencia"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnNewFirePokemon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="createNewFirePokemon"
+                    android:text="Crear"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="32"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivPlantPokemon"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    tools:srcCompat="@mipmap/vulbasaur" />
+
+                <TextView
+                    android:id="@+id/tvPlantPokemon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textSize="11sp" />
+
+                <EditText
+                    android:id="@+id/etNamePlantPokermon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Nombre"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/etAttackPowerPlantPokermon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Poder de ataque"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/etMaxResistencePlantPokermon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Máx resistencia"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnNewPlanthPokemon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="createNewPlantPokemon"
+                    android:text="Crear"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"></LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="409dp"
+            android:layout_height="230dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="32"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnSayHiWaterPokemon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="sayHiWaterPokemon"
+                    android:text="Saludar"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnCureWaterPokemon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="cureWaterPokemon"
+                    android:text="Sanar"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/etNewNameWater"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:hint="Nuevo nombre"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnWaterEvolve"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="evolveWaterPokemon"
+                    android:text="Evolucionar"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="32"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnSayHiFirePokemon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="sayHiFirePokemon"
+                    android:text="Saludar"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnCureFirePokemon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="cureFirePokemon"
+                    android:text="Sanar"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/etNewNameFirePokemon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nuevo nombre"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnEvolveFirePokemon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="evolveFirePokemon"
+                    android:text="Evolucionar"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="32"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnSayHiPlantPokemon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="sayHiPlantPokemon"
+                    android:text="Saludar"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnCurePlantPokemon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="curePlantPokemon"
+                    android:text="Sanar"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/etNewNamePlantPokemon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:hint="Nuevo nombre"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnEvolvePlantPokemon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="evolvePlantPokemon"
+                    android:text="Evolucionar"
+                    android:textSize="10sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

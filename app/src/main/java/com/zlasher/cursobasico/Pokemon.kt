@@ -1,6 +1,7 @@
 package com.zlasher.cursobasico
 
 import android.widget.Toast
+import com.zlasher.cursobasico.MainActivity.Companion.mainContext
 
 
 open class Pokemon(
@@ -44,10 +45,11 @@ open class Pokemon(
     fun evolve(name: String) {
         this.name = name
         this.attackPower *= 1.20f
-        this.sayHi()
+        //this.sayHi()
     }
 
     fun attack() {
         Toast.makeText(mainContext, "Al ataquee", Toast.LENGTH_LONG).show()
     }
+
 }
