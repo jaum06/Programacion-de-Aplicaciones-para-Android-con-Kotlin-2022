@@ -1,7 +1,7 @@
 package com.zlasher.cursobasico
 
-import android.view.View
-import android.widget.EditText
+import android.widget.Toast
+import com.zlasher.cursobasico.MainActivity.Companion.mainContext
 
 class WaterPokemon(name: String = "Pok", attackPower: Float = 30f, life: Float = 100f) :
     Pokemon(name, attackPower, life) {
@@ -24,5 +24,9 @@ class WaterPokemon(name: String = "Pok", attackPower: Float = 30f, life: Float =
 
     fun immerse() {
         this.submergedTime++
+    }
+
+    override fun attack() {
+        Toast.makeText(mainContext, "Ataque con chorro de agua!!!", Toast.LENGTH_LONG).show()
     }
 }

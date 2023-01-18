@@ -48,7 +48,7 @@ open class Pokemon(
         //this.sayHi()
     }
 
-    fun attack() {
+    open fun attack() {
         Toast.makeText(mainContext, "Al ataquee", Toast.LENGTH_LONG).show()
     }
 
