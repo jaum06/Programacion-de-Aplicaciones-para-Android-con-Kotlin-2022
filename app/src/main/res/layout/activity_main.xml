@@ -26,7 +26,8 @@
             android:id="@+id/tvPokemon"
             android:layout_width="151dp"
             android:layout_height="wrap_content"
-            android:text="Pokemon" />
+            android:text="Pokemon"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout

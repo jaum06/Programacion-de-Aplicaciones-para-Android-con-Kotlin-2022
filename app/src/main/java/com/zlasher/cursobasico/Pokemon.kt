@@ -1,9 +1,12 @@
 package com.zlasher.cursobasico
 
-class Pokemon(
-    private var name: String = "Pok",
-    private var attackPower: Float = 30f,
-    private var life: Float = 100f
+import android.widget.Toast
+
+
+open class Pokemon(
+    protected var name: String = "Pok",
+    protected var attackPower: Float = 30f,
+    protected var life: Float = 100f
 ) {
 
     fun Pokemon(name: String, attackPower: Float) {
@@ -11,22 +14,40 @@ class Pokemon(
         this.name = name
         this.attackPower = attackPower
         this.life = 100f
+        this.sayHi()
     }
 
-    fun getName(): String {
+    internal fun getName(): String {
         return this.name
     }
 
-    fun getAttackPower(): Float {
+    internal fun getAttackPower(): Float {
         return this.attackPower
     }
 
-    fun getLife(): Float {
+    internal fun getLife(): Float {
         return this.life
     }
 
-    fun setLife(life: Float) {
+    internal fun setLife(life: Float) {
         this.life = life
     }
 
+    fun sayHi() {
+        Toast.makeText(mainContext, "Hola!!! soy $name", Toast.LENGTH_LONG).show()
+    }
+
+    fun cure() {
+        this.life = 100f
+    }
+
+    fun evolve(name: String) {
+        this.name = name
+        this.attackPower *= 1.20f
+        this.sayHi()
+    }
+
+    fun attack() {
+        Toast.makeText(mainContext, "Al ataquee", Toast.LENGTH_LONG).show()
+    }
 }
