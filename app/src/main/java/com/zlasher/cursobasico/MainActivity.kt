@@ -19,6 +19,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val sc = SubClasses()
+        println(sc.presentar())
+
+        val ani = SubClasses.Anidada()
+        println(ani.presentar())
+
+        val inn = SubClasses().Interna()
+        println(inn.presentar())
+
+        val sol = Star("Sol", 696340f, "Vía Láctea")
+        println(sol)
+
+        val betelgeuse = Star("Betelgeuse", 617100000f, "Orión")
+        betelgeuse.alive = false
+        println(betelgeuse.alive)
+
+        val nueva = Star()
+        println(nueva)
+
+
         var btnBatalla = findViewById<Button>(R.id.btnBatalla)
         btnBatalla.setOnClickListener {
             fight(waterPokemon, firePokemon)
