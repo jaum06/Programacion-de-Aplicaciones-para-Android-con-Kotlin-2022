@@ -173,6 +173,10 @@ class MainActivity : AppCompatActivity() {
         plantPokemon.sayHi()
     }
 
+    fun sayByeButton(v: View) {
+        plantPokemon.sayBye()
+    }
+
     fun evolvePlantPokemon(v: View) {
 
         val etNewNamePlant = findViewById<EditText>(R.id.etNewNamePlant)

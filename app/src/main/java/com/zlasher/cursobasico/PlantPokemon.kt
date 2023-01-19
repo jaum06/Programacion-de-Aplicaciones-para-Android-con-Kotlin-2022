@@ -1,7 +1,7 @@
 package com.zlasher.cursobasico
 
 class PlantPokemon(name: String = "Pok", attackPower: Float = 30f, life: Float = 100f) :
-    Pokemon(name, attackPower, life) {
+    Pokemon(name, attackPower, life) , sayBye {
 
     private var regenerationLife: Int = 2
 
@@ -20,5 +20,11 @@ class PlantPokemon(name: String = "Pok", attackPower: Float = 30f, life: Float =
     override fun attack() {
 
         println("Ataque con hoja filosa")
+    }
+
+}
+interface sayBye {
+    fun sayBye() {
+        println("Bye bye")
     }
 }
