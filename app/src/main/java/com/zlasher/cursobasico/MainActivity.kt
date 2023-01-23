@@ -40,6 +40,18 @@ class MainActivity : AppCompatActivity() {
     private fun multiplica(x: Int, y: Int) = x * y
     private fun divide(x: Int, y: Int) = x / y
 
+    private fun inColombia(h: Float): Boolean {
+        return h >= 1.6f
+    }
+
+    private fun inSpain(h: Float): Boolean {
+        return h >= 1.65f
+    }
+
+    private fun Person.checkPolice(fn: (Float) -> Boolean): Boolean {
+        return fn(height)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -61,6 +73,13 @@ class MainActivity : AppCompatActivity() {
         println("La resta de 50 y 10 es ${calculadora(50, 10, ::resta)}")
         println("La suma de 7 y 7 es ${calculadora(7, 7, ::multiplica)}")
         println("La suma de 12 y 3 es ${calculadora(12, 3, ::divide)}")
+
+        val andres = Person("Andres", "ABC123")
+        println(andres.alive)
+        println(andres.name)
+        println(andres.passport)
+        if (andres.checkPolice(::inColombia)) println("${andres.name} puede ser policia en Colombia")
+        if (andres.checkPolice(::inSpain)) println("${andres.name} puede ser policia en España")
 
         val sc = SubClasses()
         println(sc.presentar())

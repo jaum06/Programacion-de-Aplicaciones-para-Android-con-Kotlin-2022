@@ -1,6 +1,6 @@
 package com.zlasher.cursobasico
 
-class Person(var name: String = "Anonimo", var passport: String? = null) {
+class Person(var name: String = "Anonimo", var passport: String? = null, var height: Float = 1.6f) {
 
     var alive = true
 
@@ -12,4 +12,8 @@ class Person(var name: String = "Anonimo", var passport: String? = null) {
     fun die() {
         alive = false
     }
+
+    /*fun checkPolice(fn: (Float) -> Boolean): Boolean {
+        return fn(height)
+    }*/
 }
