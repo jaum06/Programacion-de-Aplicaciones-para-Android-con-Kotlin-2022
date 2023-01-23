@@ -15,9 +15,32 @@ class MainActivity : AppCompatActivity() {
     private lateinit var firePokemon: FirePokemon
     private lateinit var plantPokemon: PlantPokemon
 
+    private fun String.nospaces(): String {
+        return this.replace(" ", "")
+    }
+
+    private fun IntArray.show() {
+        print("[")
+        for (i in this) print("$i ")
+        println("]")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val usuario = "     soy yo    "
+        println("${usuario} (${usuario.length}) - ${usuario.nospaces()} (${usuario.nospaces().length})")
+
+        val array1: Array<Int> = arrayOf(1, 2, 3, 4, 5)
+        val array2 = IntArray(3)
+        array2[0] = 10
+        array2[1] = 20
+        array2[2] = 30
+        println("array2: "); array2.show()
+
+        var array3: IntArray = intArrayOf(1, 2, 3, 4, 5)
+        println("array3: "); array3.show()
 
         val sc = SubClasses()
         println(sc.presentar())
