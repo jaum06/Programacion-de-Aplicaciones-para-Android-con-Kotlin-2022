@@ -38,6 +38,16 @@ class MainActivity : AppCompatActivity() {
         val nueva = Star()
         println(nueva)
 
+        var hoy = Dias.JUEVES
+        var semana = Dias.values()
+        for (i in semana) println(i)
+
+        println(Dias.valueOf("MIERCOLES"))
+        println(hoy.name)
+        println(hoy.ordinal)
+        println(hoy.saludo())
+        println(hoy.jornada)
+        println(hoy.laboral)
 
         var btnBatalla = findViewById<Button>(R.id.btnBatalla)
         btnBatalla.setOnClickListener {
