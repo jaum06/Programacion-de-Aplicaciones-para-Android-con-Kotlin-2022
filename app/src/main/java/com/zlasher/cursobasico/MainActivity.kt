@@ -25,6 +25,21 @@ class MainActivity : AppCompatActivity() {
         println("]")
     }
 
+    private fun calculadora(n1: Int, n2: Int, fn: (Int, Int) -> Int): Int {
+        return fn(n1, n2)
+    }
+
+    private fun suma(x: Int, y: Int): Int {
+        return x + y
+    }
+
+    private fun resta(x: Int, y: Int): Int {
+        return x - y
+    }
+
+    private fun multiplica(x: Int, y: Int) = x * y
+    private fun divide(x: Int, y: Int) = x / y
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -41,6 +56,11 @@ class MainActivity : AppCompatActivity() {
 
         var array3: IntArray = intArrayOf(1, 2, 3, 4, 5)
         println("array3: "); array3.show()
+
+        println("La suma de 80 y 20 es ${calculadora(80, 20, ::suma)}")
+        println("La resta de 50 y 10 es ${calculadora(50, 10, ::resta)}")
+        println("La suma de 7 y 7 es ${calculadora(7, 7, ::multiplica)}")
+        println("La suma de 12 y 3 es ${calculadora(12, 3, ::divide)}")
 
         val sc = SubClasses()
         println(sc.presentar())
