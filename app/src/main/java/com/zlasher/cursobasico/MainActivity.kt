@@ -185,6 +185,14 @@ class MainActivity : AppCompatActivity() {
             "Marta no es muy alta"
         }
 
+        var pais: String? = "Rusia"
+        pais = pais?.uppercase() ?: "DESCONOCIDO"
+        println(pais)
+
+        var ciudad: String? = null
+        ciudad = ciudad?.uppercase() ?: "DESCONOCIDO"
+        println(ciudad)
+
         if (andres.checkPolice(::inColombia)) println("${andres.name} puede ser policia en Colombia")
         if (andres.checkPolice(::inSpain)) println("${andres.name} puede ser policia en España")
 
