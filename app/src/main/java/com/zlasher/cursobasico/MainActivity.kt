@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         return fn(height)
     }
 
-    private fun recorrerrray(array: IntArray, fn: (Int) -> Unit) {
+    private fun recorrerArray(array: IntArray, fn: (Int) -> Unit) {
         for (i in array) {
             fn(i)
         }
@@ -70,6 +70,8 @@ class MainActivity : AppCompatActivity() {
         }
         return res
     }
+
+    class IllegalPasswordException(message: String) : Exception(message)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -140,7 +142,7 @@ class MainActivity : AppCompatActivity() {
         println("array7: ${array7.show()}")
 
         var suma = 0
-        recorrerrray(array7) {
+        recorrerArray(array7) {
             suma += it
         }
         println("La suma de todos los elementos del array7 es $suma")
@@ -206,7 +208,14 @@ class MainActivity : AppCompatActivity() {
         println(res1)
 
         val res2 = valueTry(10, 0)
-        println(res1)
+        println(res2)
+
+        val password = "1234"
+        if (password.length < 6) {
+            throw IllegalPasswordException("Password muy corta")
+        } else {
+            println("Password segura")
+        }
 
         var btnBatalla = findViewById<Button>(R.id.btnBatalla)
         btnBatalla.setOnClickListener {
