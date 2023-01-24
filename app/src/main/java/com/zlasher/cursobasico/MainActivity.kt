@@ -151,6 +151,40 @@ class MainActivity : AppCompatActivity() {
         println(andres.alive)
         println(andres.name)
         println(andres.passport)
+
+        andres.die()
+        andres.height = 1.8f
+        andres.passport = "dasd12"
+
+        andres.let {
+            it.die()
+            it.height = 1.8f
+            it.passport = "asd123"
+        }
+
+        var Andres = Person("andres", "asdsad12").apply {
+            this.die()
+            this.height = 1.9f
+            this.passport = "asdwqe132"
+        }.also {
+            it.alive = true
+        }
+
+        var maria = Person("Maria", "sajidosa").run {
+            this.die()
+            this.height = 1.9f
+            this.passport = "asdwqe132"
+
+            "Maria es muy alta"
+        }
+
+        var marta = with(Person("Marta", "sadw132", 1.6f)) {
+            this.height = 1.9f
+            this.passport = "3jsakldjio"
+
+            "Marta no es muy alta"
+        }
+
         if (andres.checkPolice(::inColombia)) println("${andres.name} puede ser policia en Colombia")
         if (andres.checkPolice(::inSpain)) println("${andres.name} puede ser policia en España")
 
