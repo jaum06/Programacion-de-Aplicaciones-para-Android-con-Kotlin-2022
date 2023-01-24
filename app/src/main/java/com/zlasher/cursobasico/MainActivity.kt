@@ -8,6 +8,8 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 
+typealias aliasDato = MutableMap<Int, ArrayList<String>>
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var pokemon: Pokemon
@@ -148,8 +150,28 @@ class MainActivity : AppCompatActivity() {
         val inn = SubClasses().Interna()
         println(inn.presentar())
 
+        val saludos: aliasDato = mutableMapOf()
+        saludos[0] = arrayListOf("Hola", "Adios")
+        saludos[0] = arrayListOf("Hi", "Bye")
+
+        for ((id, palabras) in saludos) {
+            println("$id, $palabras")
+        }
+
         val sol = Star("Sol", 696340f, "Vía Láctea")
         println(sol)
+
+        val (nameStar2, radiusStar2, galaxyStar2) = Star("Sol2", 696340f, "Vía Láctea1")
+        println("Datos Star2 Desestructurada: $nameStar2, $radiusStar2, $galaxyStar2")
+
+        val (nameStar3, radiusStar3, galaxyStar3) = Star("Sol3", 696340f, "Vía Láctea2")
+        println("Datos Star3 Desestructurada: $nameStar3, $radiusStar3, $galaxyStar3")
+
+        val (nameStar4, _, galaxyStar4) = Star("Sol4", 696340f, "Vía Láctea4")
+        println("Datos Star4 Desestructurada: $nameStar4, $galaxyStar4")
+
+        var componente = Star("Sol5", 696340f, "Vía Láctea5")
+        println("Datos Star5 con Componentes: ${componente.component1()}, ${componente.component2()}, ${componente.component3()}")
 
         val betelgeuse = Star("Betelgeuse", 617100000f, "Orión")
         betelgeuse.alive = false
@@ -371,3 +393,5 @@ class MainActivity : AppCompatActivity() {
         mltBatalla.setText(text)
     }
 }
+
+
