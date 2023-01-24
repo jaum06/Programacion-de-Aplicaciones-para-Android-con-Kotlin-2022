@@ -74,6 +74,52 @@ class MainActivity : AppCompatActivity() {
         println("La suma de 7 y 7 es ${calculadora(7, 7, ::multiplica)}")
         println("La suma de 12 y 3 es ${calculadora(12, 3, ::divide)}")
 
+        var funcion = { x: Int, y: Int -> x + y }
+        println("La suma de 80 y 20 con variable es ${calculadora(80, 20, funcion)}")
+
+        funcion = { x: Int, y: Int -> x - y }
+        println("La resta de 50 y 10 con variable es ${calculadora(50, 10, funcion)}")
+
+        println(
+            "La suma de 80 y 20 con lambda es ${
+                calculadora(
+                    80,
+                    20,
+                    { x: Int, y: Int -> x + y })
+            }"
+        )
+        println(
+            "La resta de 50 y 10 con lambda es ${
+                calculadora(
+                    80,
+                    20,
+                    { x: Int, y: Int -> x - y })
+            }"
+        )
+
+        println(
+            "La potencia de 2 elevado a 5 con lambda es ${
+                calculadora(2, 5)
+                { x, y ->
+                    var valor = 1
+                    for (i in 1..y) {
+                        valor *= x
+                    }
+                    valor
+                }
+            }"
+        )
+
+        val array4 = IntArray(10) { 5 }
+        println("array4: ${array4.show()}")
+        val array5 = IntArray(10) { it }
+        println("array5: ${array5.show()}")
+        val array6 = IntArray(10) { it * 2 }
+        println("array6: ${array6.show()}")
+
+        val array7 = IntArray(10) { i -> i * 3 }
+        println("array7: ${array7.show()}")
+
         val andres = Person("Andres", "ABC123")
         println(andres.alive)
         println(andres.name)
