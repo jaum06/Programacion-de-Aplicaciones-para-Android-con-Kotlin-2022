@@ -52,6 +52,12 @@ class MainActivity : AppCompatActivity() {
         return fn(height)
     }
 
+    private fun recorrerrray(array: IntArray, fn: (Int) -> Unit) {
+        for (i in array) {
+            fn(i)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -119,6 +125,12 @@ class MainActivity : AppCompatActivity() {
 
         val array7 = IntArray(10) { i -> i * 3 }
         println("array7: ${array7.show()}")
+
+        var suma = 0
+        recorrerrray(array7) {
+            suma += it
+        }
+        println("La suma de todos los elementos del array7 es $suma")
 
         val andres = Person("Andres", "ABC123")
         println(andres.alive)
