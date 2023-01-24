@@ -60,6 +60,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun valueTry(a: Int, b: Int): Any {
+        var res = try {
+            println("División $a/$b = ")
+            a / b
+        } catch (e: Exception) {
+            println("Vamos a manejar este error")
+            "División no permitida"
+        }
+        return res
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -190,6 +201,12 @@ class MainActivity : AppCompatActivity() {
         println(hoy.saludo())
         println(hoy.jornada)
         println(hoy.laboral)
+
+        val res1 = valueTry(10, 2)
+        println(res1)
+
+        val res2 = valueTry(10, 0)
+        println(res1)
 
         var btnBatalla = findViewById<Button>(R.id.btnBatalla)
         btnBatalla.setOnClickListener {
