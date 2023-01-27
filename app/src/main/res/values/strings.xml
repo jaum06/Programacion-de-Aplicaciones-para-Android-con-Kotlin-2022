@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">introduccionkotlin</string>
+    <string name="tvads">Toca aquí para remover publicidad, obtén más niveles y vidas</string>
+    <string name="tvhorsegame">Juego del caballo</string>
+    <string name="tvleveltitle">Nivel</string>
+    <string name="tvlevel">1</string>
+    <string name="tvmovestitle">Movimientos</string>
+    <string name="tvmoves">0</string>
+    <string name="tvtimetitle">Tiempo</string>
+    <string name="tvtime">00:00</string>
+    <string name="tvlive">0</string>
+    <string name="tvlivetitle">Vidas</string>
+    <string name="tvinstructions">Mueve el caballo por el tablero para completar todas las celdas</string>
+    <string name="tvcredits">Juego creado por Zlasher</string>
+    <string name="tvintrolevel">Nivel: 1</string>
+    <string name="tvintrolives">Vidas: 1</string>
+    <string name="tvaction">Siguiente nivel</string>
 </resources>
