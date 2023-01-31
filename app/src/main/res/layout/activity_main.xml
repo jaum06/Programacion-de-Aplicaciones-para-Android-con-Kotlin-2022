@@ -84,6 +84,7 @@
                 android:id="@+id/lygame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:baselineAligned="false"
                 android:orientation="horizontal"
                 android:weightSum="3"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -177,32 +178,6 @@
                         android:textColor="@color/app_color_light" />
                 </LinearLayout>
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/tvinstructions"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/tvinstructions"
-                android:textAlignment="center"
-                android:textColor="@color/app_color_regular"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tlboard" />
-
-            <TextView
-                android:id="@+id/tvcredits"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/tvcredits"
-                android:textAlignment="center"
-                android:textColor="@color/app_color_regular"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvinstructions" />
-
             <TableLayout
                 android:id="@+id/tlboard"
                 android:layout_width="match_parent"
@@ -883,7 +858,32 @@
                         android:onClick="checkCellClicked"
                         android:tag="c77" />
                 </TableRow>
+
             </TableLayout>
+            <TextView
+                android:id="@+id/tvinstructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/tvinstructions"
+                android:textAlignment="center"
+                android:textColor="@color/app_color_regular"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tlboard" />
+
+            <TextView
+                android:id="@+id/tvcredits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tvcredits"
+                android:textAlignment="center"
+                android:textColor="@color/app_color_regular"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvinstructions" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clmessage"
@@ -953,10 +953,13 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvaction" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </ScrollView>
+
 
     <TextView
         android:id="@+id/tvbannerads"
@@ -967,5 +970,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
