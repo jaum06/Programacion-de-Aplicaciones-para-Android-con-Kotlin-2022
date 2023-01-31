@@ -200,8 +200,8 @@
                         android:layout_weight="1"
                         android:background="@color/white_cell"
                         android:onClick="checkCellClicked"
-                        android:src="@drawable/ic_horse"
-                        android:tag="c00" />
+                        android:tag="c00"
+                        tools:srcCompat="@drawable/ic_horse" />
 
                     <ImageView
                         android:id="@+id/c10"
@@ -942,7 +942,7 @@
                 <ImageButton
                     android:id="@+id/ibaction"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="48dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginEnd="24dp"
                     android:layout_marginBottom="40dp"
