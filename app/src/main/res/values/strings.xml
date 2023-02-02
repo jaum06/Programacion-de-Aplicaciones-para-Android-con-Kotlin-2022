@@ -10,6 +10,8 @@
     <string name="tvtime">00:00</string>
     <string name="tvlive">0</string>
     <string name="tvlivetitle">Vidas</string>
+    <string name="tvoptionstitle">Opciones</string>
+    <string name="tvoptions">0</string>
     <string name="tvinstructions">Mueve el caballo por el tablero para completar todas las celdas</string>
     <string name="tvcredits">Juego creado por Zlasher</string>
     <string name="tvintrolevel">Nivel: 1</string>

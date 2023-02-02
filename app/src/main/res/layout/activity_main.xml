@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:baselineAligned="false"
                 android:orientation="horizontal"
-                android:weightSum="3"
+                android:weightSum="4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvlevel">
@@ -95,9 +95,9 @@
                     android:id="@+id/lymoves"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="12dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -124,9 +124,9 @@
                     android:id="@+id/lytime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="12dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -153,9 +153,9 @@
                     android:id="@+id/lylives"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="12dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -177,6 +177,35 @@
                         android:textAlignment="center"
                         android:textColor="@color/app_color_light" />
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lyoptions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvoptiontitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/app_color_regular"
+                        android:text="@string/tvoptionstitle"
+                        android:textAlignment="center"
+                        android:textColor="@color/app_color_light" />
+
+                    <TextView
+                        android:id="@+id/tvoption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/app_color_regular"
+                        android:text="@string/tvoptions"
+                        android:textAlignment="center"
+                        android:textColor="@color/app_color_light" />
+                </LinearLayout>
+
             </LinearLayout>
             <TableLayout
                 android:id="@+id/tlboard"

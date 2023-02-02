@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 
@@ -12,6 +13,9 @@ class MainActivity : AppCompatActivity() {
     private var cellSelectedX = 0
     private var cellSelectedY = 0
     private lateinit var board: Array<IntArray>
+    private var options = 0
+    private var nameColorBlack = "black_cell"
+    private var nameColorWhite = "white_cell"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -28,6 +32,10 @@ class MainActivity : AppCompatActivity() {
         val y = name.subSequence(2, 3).toString().toInt()
 
         checkCell(x, y)
+        for (i in board.indices) {
+            println(board[i].contentToString())
+        }
+        println("------------------------------------------------------------------")
     }
 
     private fun checkCell(x: Int, y: Int) {
@@ -37,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         var checkTrue = false
 
-        if (board[x][y] == 1) checkTrue = false
+        if (board[y][x] == 1) checkTrue = false
         else if (difX == 1 && difY == 2) checkTrue = true
         else if (difX == 2 && difY == 1) checkTrue = true
 
@@ -68,11 +76,109 @@ class MainActivity : AppCompatActivity() {
 
     private fun selectCell(x: Int, y: Int) {
 
-        board[x][y] = 1
+        board[y][x] = 1
         paintHorseCell(cellSelectedX, cellSelectedY, "previous_cell")
         cellSelectedX = x
         cellSelectedY = y
+        clearOptions()
         paintHorseCell(x, y, "selected_cell")
+        checkOption(x, y)
+    }
+
+    private fun clearOption(x: Int, y: Int) {
+
+        val imageView: ImageView = findViewById(resources.getIdentifier("c$x$y", "id", packageName))
+        if (checkColorCell(x, y) == "black") {
+            imageView.setBackgroundColor(
+                ContextCompat.getColor(
+                    this,
+                    resources.getIdentifier(nameColorBlack, "color", packageName)
+                )
+            )
+        } else {
+            imageView.setBackgroundColor(
+                ContextCompat.getColor(
+                    this,
+                    resources.getIdentifier(nameColorWhite, "color", packageName)
+                )
+            )
+        }
+        if (board[x][y] == 1) {
+            imageView.setBackgroundColor(
+                ContextCompat.getColor(
+                    this,
+                    resources.getIdentifier("previous_cell", "color", packageName)
+                )
+            )
+        }
+    }
+
+    private fun clearOptions() {
+
+        for (i in 0..7) {
+            for (j in 0..7) {
+                if (board[i][j] == 2 || board[i][j] == 9) {
+                    if (board[i][j] == 9) {
+                        board[i][j] = 0
+                        clearOption(j, i)
+                    }
+                }
+            }
+        }
+    }
+
+
+    private fun checkOption(x: Int, y: Int) {
+
+        options = 0
+        checkMove(x, y, 1, -2) // Valida el movimiento a la derecha - arriba largo
+        checkMove(x, y, 2, -1) // Valida el movimiento a la derecha largo - arriba
+        checkMove(x, y, 1, 2) // Valida el movimiento a la derecha - abajo largo
+        checkMove(x, y, 2, 1) // Valida el movimiento a la derecha largo- abajo
+        checkMove(x, y, -1, -2) // Valida el movimiento a la izquierda - arriba largo
+        checkMove(x, y, -2, -1) // Valida el movimiento a la izquierda largo - arriba
+        checkMove(x, y, -1, 2) // Valida el movimiento a la izquierda - abajo largo
+        checkMove(x, y, -2, 1) // Valida el movimiento a la izquierda largo - abajo
+        val tvoption = findViewById<TextView>(R.id.tvoption)
+        tvoption.text = options.toString()
+    }
+
+    private fun checkMove(x: Int, y: Int, movX: Int, movY: Int) {
+
+        val optionX = x + movX
+        val optionY = y + movY
+
+        if (optionX >= 0 && optionY >= 0 && optionX <= 7 && optionY <= 7) {
+            if (board[optionY][optionX] == 0 || board[optionY][optionX] == 2) {
+                options++
+                paintOptions(optionX, optionY)
+                board[optionY][optionX] = 9
+            }
+        }
+    }
+
+    private fun paintOptions(x: Int, y: Int) {
+
+        val imageView: ImageView = findViewById(resources.getIdentifier("c$x$y", "id", packageName))
+        if (checkColorCell(x, y) == "black") {
+            imageView.setBackgroundResource(R.drawable.option_black)
+        } else {
+            imageView.setBackgroundResource(R.drawable.option_white)
+        }
+    }
+
+    private fun checkColorCell(x: Int, y: Int): String {
+
+        val blackColumn = arrayOf(1, 3, 5, 7)
+        val blackRow = arrayOf(0, 2, 4, 6)
+        val color =
+            if ((blackColumn.contains(x) && blackRow.contains(y) || blackRow.contains(x) && blackColumn.contains(
+                    y
+                ))
+            ) {
+                "black"
+            } else "white"
+        return color
     }
 
     private fun paintHorseCell(x: Int, y: Int, color: String) {
