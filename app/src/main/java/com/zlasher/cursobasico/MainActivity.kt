@@ -2,14 +2,20 @@ package com.zlasher.cursobasico
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
+    private var mHandler: Handler? = null
+    private var timeInSeconds = 0L
+    private var gaming = true
     private var cellSelectedX = 0
     private var cellSelectedY = 0
     private lateinit var board: Array<IntArray>
@@ -26,8 +32,86 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initScreenGame()
+        startGame()
+    }
+
+    private fun startGame() {
+
+        gaming = true
         resetBoard()
+        clearBoard()
         setFirstPosition()
+        resetTime()
+        startTime()
+    }
+
+    private fun startTime() {
+
+        mHandler = Handler(Looper.getMainLooper())
+        chronometer.run()
+    }
+
+    private fun resetTime() {
+
+        mHandler?.removeCallbacks(chronometer)
+        timeInSeconds = 0
+
+        val tvtime = findViewById<TextView>(R.id.tvtime)
+        tvtime.text = "00:00"
+    }
+
+    private var chronometer: Runnable = object : Runnable {
+        override fun run() {
+            try {
+                if (gaming) {
+                    timeInSeconds++
+                    updateStopWatchView(timeInSeconds)
+                }
+            } finally {
+                mHandler!!.postDelayed(this, 1000L)
+            }
+        }
+
+    }
+
+    private fun updateStopWatchView(timeInSeconds: Long) {
+
+        val formattedTime = getFormattedStopWatch((timeInSeconds * 1000))
+        val tvtime = findViewById<TextView>(R.id.tvtime)
+        tvtime.text = formattedTime
+    }
+
+    private fun getFormattedStopWatch(ms: Long): String {
+
+        var milliseconds = ms
+        val minutes = TimeUnit.MILLISECONDS.toMinutes(milliseconds)
+        milliseconds -= TimeUnit.MINUTES.toMillis(minutes)
+        val seconds = TimeUnit.MILLISECONDS.toSeconds(milliseconds)
+
+        return "${if (minutes < 10) "0" else ""}$minutes:" +
+                "${if (seconds < 10) "0" else ""}$seconds"
+    }
+
+    private fun clearBoard() {
+
+        var imageView: ImageView
+        val colorBlack = ContextCompat.getColor(
+            this,
+            resources.getIdentifier(nameColorBlack, "color", packageName)
+        )
+        val colorWhite = ContextCompat.getColor(
+            this,
+            resources.getIdentifier(nameColorWhite, "color", packageName)
+        )
+
+        for (i in 0..7) {
+            for (j in 0..7) {
+                imageView = findViewById(resources.getIdentifier("c$i$j", "id", packageName))
+                imageView.setImageResource(0)
+                if (checkColorCell(i, j) == "black") imageView.setBackgroundColor(colorBlack)
+                else imageView.setBackgroundColor(colorWhite)
+            }
+        }
     }
 
     fun checkCellClicked(v: View) {
@@ -142,6 +226,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showMessage(title: String, action: String, gameOver: Boolean) {
 
+        gaming = false
         val clmessage = findViewById<ConstraintLayout>(R.id.clmessage)
         clmessage.visibility = View.VISIBLE
 
