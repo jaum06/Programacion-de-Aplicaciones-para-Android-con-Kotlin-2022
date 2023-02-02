@@ -114,19 +114,19 @@ class MainActivity : AppCompatActivity() {
         checkOption(x, y)
         if (moves > 0) {
             checkNewBonus()
-            checkGameOver(x, y)
+            checkGameOver()
         } else showMessage("Has ganado!!!", "Siguiente nivel", false)
 
     }
 
-    private fun checkGameOver(x: Int, y: Int) {
+    private fun checkGameOver() {
 
         if (options == 0) {
-            if (bonus == 0) showMessage("Game over", "Intena de nuevo", true)
-            else {
+            if (bonus > 0) {
                 checkMovement = false
                 paintAllOptions()
-            }
+            } else showMessage("Game over", "Intena de nuevo", true)
+
         }
     }
 
