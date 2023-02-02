@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var board: Array<IntArray>
     private var options = 0
     private var bonus = 0
-
+    private var checkMovement = true
     private var levelMoves = 64
     private var moves = 64
     private var movesRequired = 4
@@ -45,15 +45,28 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkCell(x: Int, y: Int) {
 
-        val difX = kotlin.math.abs(x - cellSelectedX)
-        val difY = kotlin.math.abs(y - cellSelectedY)
+        var checkTrue = true
+        if (checkMovement) {
+            val difX = kotlin.math.abs(x - cellSelectedX)
+            val difY = kotlin.math.abs(y - cellSelectedY)
 
-        var checkTrue = false
+            checkTrue = false
 
-        if (board[y][x] == 1) checkTrue = false
-        else if (difX == 1 && difY == 2) checkTrue = true
-        else if (difX == 2 && difY == 1) checkTrue = true
+            if (board[y][x] == 1) checkTrue = false
+            else if (difX == 1 && difY == 2) checkTrue = true
+            else if (difX == 2 && difY == 1) checkTrue = true
 
+        } else {
+            if (board[y][x] != 1) {
+                bonus--
+                val tvbonus = findViewById<TextView>(R.id.tvbonus)
+                tvbonus.text = if (bonus != 0) {
+                    "Bonus: $bonus"
+                } else {
+                    ""
+                }
+            }
+        }
         if (checkTrue) selectCell(x, y)
     }
 
@@ -97,6 +110,7 @@ class MainActivity : AppCompatActivity() {
         cellSelectedY = y
         clearOptions()
         paintHorseCell(x, y, "selected_cell")
+        checkMovement = true
         checkOption(x, y)
         if (moves > 0) {
             checkNewBonus()
@@ -109,6 +123,20 @@ class MainActivity : AppCompatActivity() {
 
         if (options == 0) {
             if (bonus == 0) showMessage("Game over", "Intena de nuevo", true)
+            else {
+                checkMovement = false
+                paintAllOptions()
+            }
+        }
+    }
+
+    private fun paintAllOptions() {
+
+        for (i in 0..7) {
+            for (j in 0..7) {
+                if (board[j][i] != 1) paintOption(j, i)
+                if (board[j][i] == 0) board[j][i] = 9
+            }
         }
     }
 
@@ -159,13 +187,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun paintBonusCell(x: Int, y: Int) {
 
-        val imageView: ImageView = findViewById(resources.getIdentifier("c$x$y", "id", packageName))
+        val imageView: ImageView =
+            findViewById(resources.getIdentifier("c$x$y", "id", packageName))
         imageView.setImageResource(R.drawable.bonus)
     }
 
     private fun clearOption(x: Int, y: Int) {
 
-        val imageView: ImageView = findViewById(resources.getIdentifier("c$x$y", "id", packageName))
+        val imageView: ImageView =
+            findViewById(resources.getIdentifier("c$x$y", "id", packageName))
         if (checkColorCell(x, y) == "black") {
             imageView.setBackgroundColor(
                 ContextCompat.getColor(
@@ -229,15 +259,16 @@ class MainActivity : AppCompatActivity() {
         if (optionX >= 0 && optionY >= 0 && optionX <= 7 && optionY <= 7) {
             if (board[optionY][optionX] == 0 || board[optionY][optionX] == 2) {
                 options++
-                paintOptions(optionX, optionY)
+                paintOption(optionX, optionY)
                 if (board[optionY][optionX] == 0) board[optionY][optionX] = 9
             }
         }
     }
 
-    private fun paintOptions(x: Int, y: Int) {
+    private fun paintOption(x: Int, y: Int) {
 
-        val imageView: ImageView = findViewById(resources.getIdentifier("c$x$y", "id", packageName))
+        val imageView: ImageView =
+            findViewById(resources.getIdentifier("c$x$y", "id", packageName))
         if (checkColorCell(x, y) == "black") {
             imageView.setBackgroundResource(R.drawable.option_black)
         } else {
@@ -261,7 +292,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun paintHorseCell(x: Int, y: Int, color: String) {
 
-        val imageView: ImageView = findViewById(resources.getIdentifier("c$x$y", "id", packageName))
+        val imageView: ImageView =
+            findViewById(resources.getIdentifier("c$x$y", "id", packageName))
         imageView.setBackgroundColor(
             ContextCompat.getColor(
                 this,
