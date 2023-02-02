@@ -15,7 +15,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var board: Array<IntArray>
     private var options = 0
     private var bonus = 0
-    //private var levelMoves = 64
+
+    private var levelMoves = 64
     private var moves = 64
     private var movesRequired = 4
     private var nameColorBlack = "black_cell"
@@ -99,18 +100,44 @@ class MainActivity : AppCompatActivity() {
         checkOption(x, y)
         if (moves > 0) {
             checkNewBonus()
-            //checkGameOver(x,y)
-        }/*else{
-            checkSuccessFulEnd()
-        }*/
+            checkGameOver(x, y)
+        } else showMessage("Has ganado!!!", "Siguiente nivel", false)
+
+    }
+
+    private fun checkGameOver(x: Int, y: Int) {
+
+        if (options == 0) {
+            if (bonus == 0) showMessage("Game over", "Intena de nuevo", true)
+        }
+    }
+
+    private fun showMessage(title: String, action: String, gameOver: Boolean) {
+
+        val clmessage = findViewById<ConstraintLayout>(R.id.clmessage)
+        clmessage.visibility = View.VISIBLE
+
+        val tvtitlemessage = findViewById<TextView>(R.id.tvtitlemessage)
+        tvtitlemessage.text = title
+
+        val tvtime = findViewById<TextView>(R.id.tvtime)
+
+        val score =
+            if (gameOver) "Puntaje: ${levelMoves - moves} / $levelMoves" else tvtime.text.toString()
+
+        val tvscoremessage = findViewById<TextView>(R.id.tvscoremessage)
+        tvscoremessage.text = score
+
+        val tvaction = findViewById<TextView>(R.id.tvaction)
+        tvaction.text = action
     }
 
     private fun growProgressBonus() {
 
-        //val movesDone = levelMoves - moves
-        //val bonusDone = movesDone / movesRequired
-        //val movesRest = movesRequired * bonusDone
-        //val bonusGrow = movesDone - movesRest
+        /*val movesDone = levelMoves - moves
+        val bonusDone = movesDone / movesRequired
+        val movesRest = movesRequired * bonusDone
+        val bonusGrow = movesDone - movesRest*/
     }
 
     private fun checkNewBonus() {
