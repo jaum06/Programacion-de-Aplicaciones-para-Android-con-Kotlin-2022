@@ -14,6 +14,8 @@ class MainActivity : AppCompatActivity() {
     private var cellSelectedY = 0
     private lateinit var board: Array<IntArray>
     private var options = 0
+    private var bonus = 0
+    //private var levelMoves = 64
     private var moves = 64
     private var movesRequired = 4
     private var nameColorBlack = "black_cell"
@@ -82,6 +84,12 @@ class MainActivity : AppCompatActivity() {
 
         moves--
         tvmoves.text = moves.toString()
+        growProgressBonus()
+        if (board[y][x] == 2) {
+            bonus++
+            val tvbonus = findViewById<TextView>(R.id.tvbonus)
+            tvbonus.text = "Bonus: $bonus"
+        }
         board[y][x] = 1
         paintHorseCell(cellSelectedX, cellSelectedY, "previous_cell")
         cellSelectedX = x
@@ -97,6 +105,14 @@ class MainActivity : AppCompatActivity() {
         }*/
     }
 
+    private fun growProgressBonus() {
+
+        //val movesDone = levelMoves - moves
+        //val bonusDone = movesDone / movesRequired
+        //val movesRest = movesRequired * bonusDone
+        //val bonusGrow = movesDone - movesRest
+    }
+
     private fun checkNewBonus() {
 
         if (moves % movesRequired == 0) {
@@ -110,7 +126,7 @@ class MainActivity : AppCompatActivity() {
                 if (board[bonusCellY][bonusCellX] == 0) bonusCell = true
             }
             board[bonusCellY][bonusCellX] = 2
-            paintBonusCell(bonusCellX,bonusCellY)
+            paintBonusCell(bonusCellX, bonusCellY)
         }
     }
 
@@ -187,7 +203,7 @@ class MainActivity : AppCompatActivity() {
             if (board[optionY][optionX] == 0 || board[optionY][optionX] == 2) {
                 options++
                 paintOptions(optionX, optionY)
-                board[optionY][optionX] = 9
+                if (board[optionY][optionX] == 0) board[optionY][optionX] = 9
             }
         }
     }
