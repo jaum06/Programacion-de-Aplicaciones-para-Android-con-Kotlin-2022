@@ -1,18 +1,34 @@
 package com.zlasher.cursobasico
 
+import android.content.ContentValues
+import android.content.Intent
+import android.graphics.Bitmap
+import android.media.MediaScannerConnection
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.os.Handler
 import android.os.Looper
+import android.provider.MediaStore
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.test.runner.screenshot.ScreenCapture
+import androidx.test.runner.screenshot.Screenshot.capture
+import java.io.File
+import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.concurrent.TimeUnit
+import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity() {
 
+    private var bitmap: Bitmap? = null
     private var mHandler: Handler? = null
     private var timeInSeconds = 0L
     private var gaming = true
@@ -27,6 +43,8 @@ class MainActivity : AppCompatActivity() {
     private var movesRequired = 4
     private var nameColorBlack = "black_cell"
     private var nameColorWhite = "white_cell"
+    private var string_share = ""
+    private var level = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -112,6 +130,99 @@ class MainActivity : AppCompatActivity() {
                 else imageView.setBackgroundColor(colorWhite)
             }
         }
+    }
+
+    fun launchShareGame(v: View) {
+        shareGame()
+    }
+
+    private fun shareGame() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
+            1
+        )
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
+            1
+        )
+
+        var ssc: ScreenCapture = capture(this)
+        bitmap = ssc.getBitmap()
+
+        if (bitmap != null) {
+            var idGame = SimpleDateFormat("yyyy/MM/dd").format(Date())
+            idGame = idGame.replace(":", "")
+            idGame = idGame.replace("/", "")
+
+            val path = saveImage(bitmap, "${idGame}.jpg")
+            val bmpUri = Uri.parse(path)
+
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri)
+            shareIntent.putExtra(Intent.EXTRA_TEXT, string_share)
+            shareIntent.type = "image/png"
+
+            val finalShareIntent = Intent.createChooser(
+                shareIntent,
+                "Selecciona la aplicación en la cual quieres compartir el juego"
+            )
+            finalShareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            this.startActivity(finalShareIntent)
+        }
+    }
+
+    private fun saveImage(bitmap: Bitmap?, fileName: String): String? {
+        if (bitmap == null) {
+            return null
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+            val contentValues = ContentValues().apply {
+                put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
+                put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+                put(
+                    MediaStore.MediaColumns.RELATIVE_PATH,
+                    Environment.DIRECTORY_PICTURES + "/Screenshots"
+                )
+            }
+            val uri = this.contentResolver.insert(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                contentValues
+            )
+            if (uri != null) {
+                this.contentResolver.openOutputStream(uri).use {
+                    if (it == null) {
+                        return@use
+                    }
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 85, it)
+                    it.flush()
+                    it.close()
+
+                    // add pic to gallery
+                    MediaScannerConnection.scanFile(this, arrayOf(uri.toString()), null, null)
+                }
+            }
+            return uri.toString()
+        }
+
+        val filePath = Environment.getExternalStoragePublicDirectory(
+            Environment.DIRECTORY_PICTURES + "/Screenshots"
+        ).absolutePath
+
+        val dir = File(filePath)
+        if (!dir.exists()) dir.mkdirs()
+        val file = File(dir, fileName)
+        val fOut = FileOutputStream(file)
+
+        bitmap.compress(Bitmap.CompressFormat.PNG, 85, fOut)
+        fOut.flush()
+        fOut.close()
+
+        //add pic to gallery
+        MediaScannerConnection.scanFile(this, arrayOf(file.toString()), null, null)
+        return filePath
     }
 
     fun checkCellClicked(v: View) {
@@ -235,8 +346,16 @@ class MainActivity : AppCompatActivity() {
 
         val tvtime = findViewById<TextView>(R.id.tvtime)
 
-        val score =
-            if (gameOver) "Puntaje: ${levelMoves - moves} / $levelMoves" else tvtime.text.toString()
+        var score = ""
+        if (gameOver) {
+            "Puntaje: ${levelMoves - moves} / $levelMoves"
+            string_share =
+                "Este juego me vuelve loco!!! (" + score + ") http://jotajotavm.com/retocaballo"
+        } else {
+            score = tvtime.text.toString()
+            string_share =
+                "Vamos!!! Nuevo desafio completado. Level ${level} (" + score + ") http://jotajotavm.com/retocaballo"
+        }
 
         val tvscoremessage = findViewById<TextView>(R.id.tvscoremessage)
         tvscoremessage.text = score
