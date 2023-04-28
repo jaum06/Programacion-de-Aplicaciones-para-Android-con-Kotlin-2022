@@ -21,10 +21,10 @@ import androidx.test.runner.screenshot.ScreenCapture
 import androidx.test.runner.screenshot.Screenshot.capture
 import java.io.File
 import java.io.FileOutputStream
+import java.lang.Math.abs
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.concurrent.TimeUnit
-import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,13 +38,17 @@ class MainActivity : AppCompatActivity() {
     private var options = 0
     private var bonus = 0
     private var checkMovement = true
-    private var levelMoves = 64
-    private var moves = 64
-    private var movesRequired = 4
+
+    private var nextLevel = false
+    private var level = 1
+    private var levelMoves = 0
+    private var movesRequired = 0
+    private var moves = 0
+    private var lives = 1
+
     private var nameColorBlack = "black_cell"
     private var nameColorWhite = "white_cell"
     private var string_share = ""
-    private var level = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -55,12 +59,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun startGame() {
 
-        gaming = true
+        setLevel()
+        setLevelParameters()
+
         resetBoard()
         clearBoard()
+
+        setBoardLevel()
         setFirstPosition()
+
         resetTime()
         startTime()
+        gaming = true
     }
 
     private fun startTime() {
@@ -279,12 +289,91 @@ class MainActivity : AppCompatActivity() {
 
     private fun setFirstPosition() {
 
-        val x = (0..7).random()
-        val y = (0..7).random()
+        var x = 0
+        var y = 0
+        var firstPosition = false
 
+        while (firstPosition) {
+            x = (0..7).random()
+            y = (0..7).random()
+            if (board[x][y] == 0) firstPosition = true
+            checkOptions(x, y)
+            if (options == 0) firstPosition = false
+        }
         cellSelectedX = x
         cellSelectedY = y
         selectCell(x, y)
+    }
+
+    private fun setLevel() {
+
+        if (nextLevel) {
+            level++
+        } else {
+            lives--
+            if (lives < 1) {
+                level = 1
+                lives = 1
+            }
+        }
+    }
+
+    private fun setLevelParameters() {
+        var tvLive = findViewById<TextView>(R.id.tvlive)
+        tvLive.text = lives.toString()
+
+
+        var tvlevel = findViewById<TextView>(R.id.tvlevel)
+        tvlevel.text = level.toString()
+
+        bonus = 0
+        var tvBonus = findViewById<TextView>(R.id.tvbonus)
+        tvBonus.text = ""
+
+        setLevelMoves()
+        moves = levelMoves
+
+        movesRequired = setMovesRequired()
+    }
+
+    private fun setLevelMoves() {
+
+        when (level) {
+            1 -> levelMoves = 64
+            2 -> levelMoves = 56
+            3 -> levelMoves = 32
+            4 -> levelMoves = 16
+            5 -> levelMoves = 48
+            6 -> levelMoves = 36
+            7 -> levelMoves = 48
+            8 -> levelMoves = 49
+            9 -> levelMoves = 59
+            10 -> levelMoves = 48
+            11 -> levelMoves = 64
+            12 -> levelMoves = 48
+            13 -> levelMoves = 48
+        }
+    }
+
+    private fun setMovesRequired(): Int {
+
+        var movesRequired = 0
+        when (level) {
+            1 -> movesRequired = 8
+            2 -> movesRequired = 10
+            3 -> movesRequired = 12
+            4 -> movesRequired = 10
+            5 -> movesRequired = 10
+            6 -> movesRequired = 12
+            7 -> movesRequired = 5
+            8 -> movesRequired = 7
+            9 -> movesRequired = 9
+            10 -> movesRequired = 8
+            11 -> movesRequired = 1000
+            12 -> movesRequired = 5
+            13 -> movesRequired = 5
+        }
+        return movesRequired
     }
 
     private fun selectCell(x: Int, y: Int) {
@@ -306,7 +395,7 @@ class MainActivity : AppCompatActivity() {
         clearOptions()
         paintHorseCell(x, y, "selected_cell")
         checkMovement = true
-        checkOption(x, y)
+        checkOptions(x, y)
         if (moves > 0) {
             checkNewBonus()
             checkGameOver()
@@ -338,6 +427,7 @@ class MainActivity : AppCompatActivity() {
     private fun showMessage(title: String, action: String, gameOver: Boolean) {
 
         gaming = false
+        nextLevel = !gameOver
         val clmessage = findViewById<ConstraintLayout>(R.id.clmessage)
         clmessage.visibility = View.VISIBLE
 
@@ -370,6 +460,79 @@ class MainActivity : AppCompatActivity() {
         val bonusDone = movesDone / movesRequired
         val movesRest = movesRequired * bonusDone
         val bonusGrow = movesDone - movesRest*/
+    }
+
+    private fun setBoardLevel() {
+
+        when (level) {
+            2 -> paintLevel2()
+            3 -> paintLevel3()
+            4 -> paintLevel4()
+            5 -> paintLevel5()
+        }
+    }
+
+    private fun paintColumn(column: Int) {
+        for (i in 0..7) {
+            board[column][i] = 1
+            paintHorseCell(column, i, "previous_cell")
+        }
+    }
+
+    private fun paintRow(row: Int) {
+
+        for (i in 0..7) {
+            board[i][row] = 1
+            paintHorseCell(i, row, "previous_cell")
+        }
+
+    }
+
+    private fun paintDiagonal() {
+
+        for (i in 0..7) {
+            board[i][i] = 1
+            paintHorseCell(i, i, "previous_cell")
+        }
+
+    }
+
+    private fun paintDiagonalInverse() {
+
+        for (i in 0..7) {
+            board[i][abs(i - 7)] = 1
+            paintHorseCell(i, abs(i - 7), "previous_cell")
+        }
+
+    }
+
+    private fun paintLevel2() {
+        paintColumn(6)
+    }
+
+    private fun paintLevel3() {
+
+        for (i in 0..7) {
+            for (j in 4..7) {
+                board[i][j] = 1
+                paintHorseCell(j, i, "previous_cell")
+            }
+        }
+    }
+
+    private fun paintLevel4() {
+        paintLevel3()
+        paintLevel5()
+    }
+
+    private fun paintLevel5() {
+
+        for (i in 0..3) {
+            for (j in 0..3) {
+                board[j][i] = 1
+                paintHorseCell(j, i, "previous_cell")
+            }
+        }
     }
 
     private fun checkNewBonus() {
@@ -440,7 +603,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun checkOption(x: Int, y: Int) {
+    private fun checkOptions(x: Int, y: Int) {
 
         options = 0
         checkMove(x, y, 1, -2) // Valida el movimiento a la derecha - arriba largo
@@ -509,14 +672,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun initScreenGame() {
 
-        hideMessage()
+        hideMessage(false)
         //setSizeBoard()
     }
 
-    private fun hideMessage() {
+    fun launchAction(v: View) {
+        hideMessage(true)
+    }
+
+    private fun hideMessage(start: Boolean) {
 
         val clmessage = findViewById<ConstraintLayout>(R.id.clmessage)
         clmessage.visibility = View.INVISIBLE
+
+        if (start) startGame()
     }
 
 
