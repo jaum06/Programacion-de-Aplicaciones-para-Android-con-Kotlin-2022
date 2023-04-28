@@ -20,10 +20,15 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.test.runner.screenshot.ScreenCapture
 import androidx.test.runner.screenshot.Screenshot.capture
+import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import java.io.File
 import java.io.FileOutputStream
 import java.lang.Math.abs
@@ -32,6 +37,9 @@ import java.util.Date
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
+
+    private var mInterstitialAd: InterstitialAd? = null
+    private var unloadedAd = true
 
     private var bitmap: Bitmap? = null
     private var mHandler: Handler? = null
@@ -77,7 +85,50 @@ class MainActivity : AppCompatActivity() {
         adView.loadAd(adRequest)
     }
 
+    private fun showInterstitial() {
+        if (mInterstitialAd != null) {
+            unloadedAd = true
+            mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
+
+                override fun onAdDismissedFullScreenContent() {
+                    // Called when ad is dismissed.
+                }
+
+                override fun onAdFailedToShowFullScreenContent(p0: AdError) {
+                    // Called when ad fails to show.
+                }
+
+                override fun onAdShowedFullScreenContent() {
+                    // Called when ad is shown.
+                    mInterstitialAd=null
+                }
+            }
+
+            mInterstitialAd?.show(this)
+        }
+    }
+
+    private fun getReadyAds() {
+        var adRequest = AdRequest.Builder().build()
+        unloadedAd = false
+        InterstitialAd.load(
+            this,
+            "ca-app-pub-3940256099942544/1033173712",
+            adRequest,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    mInterstitialAd = null
+                }
+
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    mInterstitialAd = interstitialAd
+                }
+            })
+    }
+
     private fun startGame() {
+
+        if (unloadedAd) getReadyAds()
 
         setLevel()
         setLevelParameters()
@@ -478,6 +529,7 @@ class MainActivity : AppCompatActivity() {
 
         var score = ""
         if (gameOver) {
+            showInterstitial()
             "Puntaje: ${levelMoves - moves} / $levelMoves"
             string_share =
                 "Este juego me vuelve loco!!! (" + score + ") http://jotajotavm.com/retocaballo"
