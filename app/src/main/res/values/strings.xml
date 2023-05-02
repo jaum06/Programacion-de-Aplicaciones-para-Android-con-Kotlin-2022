@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">introduccionkotlin</string>
-    <string name="tvads">Toca aquí para remover publicidad, obtén más niveles y vidas</string>
     <string name="tvhorsegame">Juego del caballo</string>
     <string name="tvleveltitle">Nivel</string>
     <string name="tvlevel">1</string>
@@ -17,4 +16,12 @@
     <string name="tvintrolevel">Nivel: 1</string>
     <string name="tvintrolives">Vidas: 1</string>
     <string name="tvaction">Siguiente nivel</string>
+
+
+    <string name="tvads">Toca aquí para remover publicidad, obtén más niveles y vidas</string>
+    <string name="premiumTitle">Obtén acceso premium de por vida</string>
+    <string name="premiumBenefit1">Sin publicidad</string>
+    <string name="premiumBenefit2">Vidas infinitas</string>
+    <string name="premiumBenefit3">Mantén tu último nivel jugado</string>
+    <string name="pay">PAGA SOLAMENTE 1$ AHORA</string>
 </resources>
