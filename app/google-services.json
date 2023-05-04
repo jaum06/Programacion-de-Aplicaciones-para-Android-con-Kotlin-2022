@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "473228120512",
+    "project_id": "wild-running-958f5",
+    "storage_bucket": "wild-running-958f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473228120512:android:d668c92a8b43698fc17825",
+        "android_client_info": {
+          "package_name": "com.zlasher.cursobasico"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473228120512-8dnshlih6h6l0dv5rd07lfb4qkd906cc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_86WRhbcMP6p_heJ-v41a92zgC2IG--4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473228120512-8dnshlih6h6l0dv5rd07lfb4qkd906cc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
