@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="207dp"
         android:src="@mipmap/banner"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -117,7 +118,7 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/lyTerminosYCondiciones" />
 
     <Button
@@ -130,7 +131,7 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/btnGoogle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
