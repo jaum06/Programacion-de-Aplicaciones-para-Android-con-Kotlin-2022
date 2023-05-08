@@ -7,7 +7,11 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.Date
 import kotlin.properties.Delegates
 
 class LoginActivity : AppCompatActivity() {
@@ -37,13 +41,28 @@ class LoginActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser != null) goHome(currentUser.email.toString(), currentUser.providerId)
+    }
+
+    override fun onBackPressed() {
+
+        val startMain = Intent(Intent.ACTION_MAIN)
+        startMain.addCategory(Intent.CATEGORY_HOME)
+        startMain.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(startMain)
+    }
+
     fun login(view: View) {
         loginUser()
     }
 
     private fun loginUser() {
 
-        email = etEmail.text.toString()
+        email = etEmail.text.toString().lowercase()
         password = etPassword.text.toString()
 
         mAuth.signInWithEmailAndPassword(email, password)
@@ -59,6 +78,29 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
+    private fun register() {
+
+        email = etEmail.text.toString().lowercase()
+        password = etPassword.text.toString()
+
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val dateRegister = SimpleDateFormat("dd/MM/yyyy").format(Date())
+                    val dbRegister = FirebaseFirestore.getInstance()
+                    dbRegister.collection("users").document(email).set(
+                        hashMapOf(
+                            "user" to email,
+                            "dateRegister" to dateRegister
+                        )
+                    )
+
+                    goHome(email, "email")
+                } else Toast.makeText(this, "Error algo ha salido mal.", Toast.LENGTH_SHORT).show()
+
+            }
+    }
+
     private fun goHome(email: String, provider: String) {
 
         userEmail = email
@@ -67,4 +109,13 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
+
+    fun goTerms(v: View) {
+        val intent = Intent(this, TermsActivity::class.java)
+        startActivity(intent)
+    }
+
+    /*fun forgotPassword(v: View) {
+        startActivity(Intent(this, ForgotPasswordActivity::class.java))
+    }*/
 }
