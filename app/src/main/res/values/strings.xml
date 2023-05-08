@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">introduccionkotlin</string>
+
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="fraseLogin">¿Hasta qué nivel eres capaz de llegar?</string>
+    <string name="btnIniciarSesion">Iniciar sesión</string>
+    <string name="tvOlvidoPassword">¿Olvidaste tu contraseña?</string>
+    <string name="cbTerminosYCondiciones">He leído y acepto los</string>
+    <string name="tvTerminosYCondiciones">términos y condiciones de uso.</string>
+    <string name="btnGoogle">Google</string>
+    <string name="btnFacebook">Facebook</string>
 </resources>

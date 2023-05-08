@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "52691303503",
+    "project_id": "wildrunning-74c37",
+    "storage_bucket": "wildrunning-74c37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52691303503:android:2e1262e4c3cf7b7c12fe3a",
+        "android_client_info": {
+          "package_name": "com.zlasher.cursobasico"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "52691303503-thpbpn46k1jcbl6s9mu365f41hqh4v31.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgJG3sXUnJ5kWEztv9B6UkUIA-AsVm5Js"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "52691303503-thpbpn46k1jcbl6s9mu365f41hqh4v31.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
