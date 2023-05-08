@@ -3,6 +3,7 @@ package com.zlasher.cursobasico
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.widget.CheckBox
 import android.widget.EditText
@@ -115,7 +116,28 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    /*fun forgotPassword(v: View) {
-        startActivity(Intent(this, ForgotPasswordActivity::class.java))
-    }*/
+    fun forgotPassword(v: View) {
+        //startActivity(Intent(this, ForgotPasswordActivity::class.java))
+        resetPassword()
+    }
+
+    private fun resetPassword() {
+
+        val e = etEmail.text.toString().lowercase()
+        if (!TextUtils.isEmpty(e)) {
+            mAuth.sendPasswordResetEmail(e)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) Toast.makeText(
+                        this,
+                        "Email enviado a $e",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    else Toast.makeText(
+                        this,
+                        "No se encontró el usuario con este correo",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+        } else Toast.makeText(this, "Indica un email...", Toast.LENGTH_SHORT).show()
+    }
 }
