@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.widget.doOnTextChanged
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
@@ -40,6 +43,25 @@ class LoginActivity : AppCompatActivity() {
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
         mAuth = FirebaseAuth.getInstance()
+
+        manageButtonLogin()
+        etEmail.doOnTextChanged { text, start, before, count -> manageButtonLogin() }
+        etPassword.doOnTextChanged { text, start, before, count -> manageButtonLogin() }
+    }
+
+    private fun manageButtonLogin() {
+
+        val btnIniciarSesion = findViewById<Button>(R.id.btnIniciarSesion)
+        email = etEmail.text.toString().lowercase()
+        password = etPassword.text.toString()
+
+        if (TextUtils.isEmpty(password) || !ValidateEmail.isEmail(email)) {
+            btnIniciarSesion.setBackgroundColor(ContextCompat.getColor(this, R.color.gray))
+            btnIniciarSesion.isEnabled = false
+        } else {
+            btnIniciarSesion.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
+            btnIniciarSesion.isEnabled = true
+        }
     }
 
     override fun onStart() {
